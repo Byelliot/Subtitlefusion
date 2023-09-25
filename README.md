@@ -32,4 +32,4 @@ folder_path = "/your_path/" #替换需要重新编码的目录
 if file.lower().endswith('danmu.ass'): #匹配ass  
 ```
 # 其他
-配合弹幕下载插件食用更香（jellyfin） https://github.com/cxfksword/jellyfin-plugin-danmu 
+配合弹幕下载插件食用更香（jellyfin） [https://github.com/cxfksword/jellyfin-plugin-danmu ](https://github.com/cxfksword/jellyfin-plugin-danmu)https://github.com/cxfksword/jellyfin-plugin-danmu
