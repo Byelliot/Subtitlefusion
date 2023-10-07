@@ -90,5 +90,5 @@ def merge_ass_files(existing_ass_path, additional_ass_path):
         existing_ass_file.writelines(existing_ass_lines)
 
 if __name__ == "__main__":
-    input_folder = "/volume2/Elliot Wu/阿里云盘/公共同步/动漫/赛博朋克：边缘行者/"  # Replace with the actual path to the folder containing the files
+    input_folder = "/your_path/"  # Replace with the actual path to the folder containing the files 
     merge_batch_subtitles(input_folder)
