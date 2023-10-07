@@ -13,7 +13,7 @@ def merge_batch_subtitles(input_folder):
                 if os.path.exists(ass_path):
                     srt_to_ass(srt_path)
                     merge_ass_files(srt_path.replace(".srt", ".ass"), ass_path)
-                    
+
 def round_time(time_str):
     hours, minutes, seconds = map(float, time_str.split(":"))
     total_seconds = hours * 3600 + minutes * 60 + seconds
@@ -46,7 +46,6 @@ def srt_to_ass(input_file):
 				 
                  "[Events]\n",
                  "Format: Layer, Start, End, Style, Actor, MarginL, MarginR, MarginV, Effect, Text\n"]
-
     i = 0
     while i < len(lines):
         line = lines[i].strip()
@@ -56,11 +55,17 @@ def srt_to_ass(input_file):
             start = round_time(start)
             end = round_time(end)
             i += 1  # Move to the next line (text)
-            text = lines[i].strip()
-
+            
+            # Combine all text lines until an empty line is encountered
+            text_lines = []
+            while i < len(lines) and lines[i].strip():
+                text_lines.append(lines[i].strip())
+                i += 1
+            
+            text = "\\N".join(text_lines)  # Join text lines with \N (new line in ASS format)
             ass_lines.append(f"Dialogue: 0,{start},{end},Default,,0,0,0,,{text}\n")
-
-        i += 1
+        else:
+            i += 1  # Move to the next line if the line is not a subtitle index
 
     with open(output_file, 'w', encoding='utf-8') as ass_file:
         ass_file.writelines(ass_lines)
@@ -85,5 +90,5 @@ def merge_ass_files(existing_ass_path, additional_ass_path):
         existing_ass_file.writelines(existing_ass_lines)
 
 if __name__ == "__main__":
-    input_folder = "/your_path/"  # Replace with the actual path to the folder containing the files
+    input_folder = "/volume2/Elliot Wu/阿里云盘/公共同步/动漫/赛博朋克：边缘行者/"  # Replace with the actual path to the folder containing the files
     merge_batch_subtitles(input_folder)
